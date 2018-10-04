@@ -5,7 +5,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import styles from './styles.css'
+import Calendar from './components/Calendar'
+import getToday from './helper/getToday'
+import './styles.css'
 
 export default class ReactjsDatePicker extends Component {
   constructor(props) {
@@ -58,11 +60,13 @@ export default class ReactjsDatePicker extends Component {
   }
 
   selectToday() {
+    const { onChange } = this.props
+
     this.setState({
       isCalendarVisible: false
     })
 
-    this.props.onChange(this.getToday())
+    onChange(getToday())
   }
 
   showCalendar() {
@@ -91,7 +95,7 @@ export default class ReactjsDatePicker extends Component {
     const { disabled, value } = this.props
 
     return (
-      <div className={styles.test} onClick={this.onClickDatePickerArea}>
+      <div className='datePicker' onClick={this.onClickDatePicker}>
         <input
           className={`datePicker__input ${
             disabled === true ? 'datePicker__input--disabled' : ''
@@ -102,7 +106,7 @@ export default class ReactjsDatePicker extends Component {
           readOnly
           disabled={disabled}
         />
-        {isCalendarVisible === false ? null : this.calender()}
+        {isCalendarVisible === false ? null : this.showCalendar()}
       </div>
     )
   }
