@@ -1,12 +1,28 @@
 import React, { Component } from 'react'
 
-import ExampleComponent from 'reactjs-date-picker'
+import ReactjsDatePicker from 'reactjs-date-picker'
 
 export default class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      value: ''
+    }
+
+    this.log = this.log.bind(this);
+  }
+
+  log(date){
+    this.setState({
+			value: date
+		});
+  }
+
   render () {
     return (
       <div>
-        <ExampleComponent text='Modern React component module' />
+        <ReactjsDatePicker {...this.state} onChange={this.log} />
       </div>
     )
   }
