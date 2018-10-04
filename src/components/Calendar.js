@@ -4,11 +4,11 @@
  */
 
 import React, { Component } from 'react'
-import SelectYear from './selectYear'
-import SelectMonth from './selectMonth'
-import WeekDays from './weekDays'
-import getTodayMixin from './getTodayMixin'
 import PropTypes from 'prop-types'
+import SelectYear from './SelectYear'
+import SelectMonth from './SelectMonth'
+import WeekDays from './WeekDays'
+import getToday from './../helper/getToday'
 
 class Calendar extends Component {
   static propTypes = {
@@ -22,7 +22,7 @@ class Calendar extends Component {
   constructor(props) {
     super(props)
     const { date } = this.props
-    const dateSelected = new Date(date || this.getToday())
+    const dateSelected = new Date(date || getToday())
     const month = dateSelected.getMonth() + 1
 
     this.state = {
@@ -30,6 +30,13 @@ class Calendar extends Component {
       month,
       year: dateSelected.getFullYear()
     }
+
+    this.getPrevMonth = this.getPrevMonth.bind(this)
+    this.getNextMonth = this.getNextMonth.bind(this)
+    this.mutateDate = this.mutateDate.bind(this)
+    this.selectYear = this.selectYear.bind(this)
+    this.selectDay = this.selectDay.bind(this)
+    this.selectMonth = this.selectMonth.bind(this)
   }
 
   getPrevMonth() {
@@ -70,8 +77,8 @@ class Calendar extends Component {
 
   mutateDate() {
     const { onClickCalendar } = this.props
-    const month = String(this.state.month).length < 2 ? `0${month}` : `${month}`
-    const day = String(this.state.day).length < 2 ? `0${day}` : `${day}`
+    const month = String(month).length < 2 ? `0${this.state.month}` : `${this.state.month}`
+    const day = String(this.state.day).length < 2 ? `0${this.state.day}` : `${this.state.day}`
     const date = `${this.state.year}-${month}-${day}`
 
     onClickCalendar(date)
@@ -89,23 +96,26 @@ class Calendar extends Component {
     }, () => this.mutateDate())
   }
 
-  SelectMonth(month) {
+  selectMonth(month) {
     this.setState({
       month
     })
   }
 
   render() {
+    const { year, month, day } = this.state
+    const { range, locale, date, selectToday } = this.props
+
     return (
       <div className='datePicker__calendar'>
         <div className='datePicker__calendar__header'>
           <span onClick={this.prevMonth} className='datePicker__prev' />
-          <SelectYear year={Number(this.state.year)} selectYear={this.selectYear} range={this.props.range} />
-          <SelectMonth month={Number(this.state.month)} selectMonth={this.selectMonth} locale={this.props.locale} />
+          <SelectYear year={Number(year)} selectYear={this.selectYear} range={range} />
+          <SelectMonth month={Number(month)} selectMonth={this.selectMonth} locale={locale} />
           <span onClick={this.nextMonth} className='datePicker__next' />
         </div>
-        <WeekDays locale={this.props.locale} highlight={new Date(this.props.date).getFullYear() === this.state.year && new Date(this.props.date).getMonth() + 1 === this.state.month} year={Number(this.state.year)} month={Number(this.state.month)} day={Number(this.state.day)} selectDay={this.selectDay} />
-        <div className='datePicker__btnGroup'><button className='datePicker__btn datePicker__btn--today' onClick={this.props.selectToday}>{this.props.locale === 'zh' ? '今天' : 'Today'}</button></div>
+        <WeekDays locale={locale} highlight={new Date(date).getFullYear() === year && new Date(date).getMonth() + 1 === month} year={Number(year)} month={Number(month)} day={Number(day)} selectDay={this.selectDay} />
+        <div className='datePicker__btnGroup'><button className='datePicker__btn datePicker__btn--today' onClick={selectToday}>{'Today'}</button></div>
       </div>
     )
   }
