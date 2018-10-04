@@ -13,6 +13,12 @@ class SelectYear extends Component {
     year: PropTypes.number
   };
 
+  constructor(props) {
+    super(props)
+
+    this.handleYearChange = this.handleYearChange.bind(this)
+  }
+
   handleYearChange(event) {
     const { selectYear } = this.props
     selectYear(Number(event.currentTarget.value))
@@ -20,8 +26,8 @@ class SelectYear extends Component {
 
   render() {
     const { range, year } = this.props
-    const startYear = typeof range === undefined ? 1984 : range[0]
-    const endYear = typeof range === undefined ? 2050 : range[1]
+    const startYear = typeof (range) === 'undefined' ? 1984 : range[0]
+    const endYear = typeof (range) === 'undefined' ? 2050 : range[1]
     const options = []
 
     for (let i = startYear, l = endYear; i <= l; i++) {

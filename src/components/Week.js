@@ -14,6 +14,12 @@ class Week extends Component {
     selectDay: PropTypes.func.isRequired
   }
 
+  constructor(props) {
+    super(props)
+
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   handleClick(event) {
     const { selectDay } = this.props
     selectDay(event.target.textContent)

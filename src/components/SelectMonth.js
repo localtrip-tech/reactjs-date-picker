@@ -13,6 +13,12 @@ class SelectMonth extends Component {
     selectMonth: PropTypes.func.isRequired
   };
 
+  constructor(props) {
+    super(props)
+
+    this.handleMonthChange = this.handleMonthChange.bind(this)
+  }
+
   handleMonthChange(event) {
     const { selectMonth } = this.props
 
@@ -39,7 +45,7 @@ class SelectMonth extends Component {
     const monthOptions = months.map((month, index) => {
       return (
         <option key={index} value={index + 1}>
-          {`${month}`}>
+          {`${month}`}
         </option>
       )
     })
