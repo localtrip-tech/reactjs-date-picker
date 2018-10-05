@@ -1,0 +1,14 @@
+.datePicker__day {
+  padding: 5px;
+  text-align: right;
+  cursor: pointer;
+}
+
+.datePicker__day:hover {
+  outline: 1px solid #0b97c4;
+}
+
+.datePicker__day--disabled:hover {
+  outline: none;
+  cursor: default;
+}

@@ -6,6 +6,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import styles from './week.css'
+
 class Week extends Component {
   static propTypes = {
     day: PropTypes.number,
@@ -30,12 +32,12 @@ class Week extends Component {
     const weekDays = (typeof days === undefined ? [] : days).map((weekDay, index) => {
       if (weekDay) {
         if (weekDay === day && highlight) {
-          return <td key={index} className={`datePicker__day--today datePicker__day`} onClick={this.handleClick} >{weekDay}</td>
+          return <td key={index} className={`${styles['datePicker__day--today']} ${styles.datePicker__day}`} onClick={this.handleClick} >{weekDay}</td>
         } else {
-          return <td key={index} className='datePicker__day' onClick={this.handleClick}>{weekDay}</td>
+          return <td key={index} className={styles.datePicker__day} onClick={this.handleClick}>{weekDay}</td>
         }
       } else {
-        return <td key={index} className={`datePicker__day--disabled datePicker__day`} />
+        return <td key={index} className={`${styles['datePicker__day--disabled']} ${styles.datePicker__day}`} />
       }
     }, this)
 

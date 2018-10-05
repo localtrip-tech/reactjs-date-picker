@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 
 import Calendar from './components/Calendar'
 import getToday from './helper/getToday'
-import './styles.css'
+import styles from './index.css'
 
 export default class ReactjsDatePicker extends Component {
   constructor(props) {
@@ -94,11 +94,13 @@ export default class ReactjsDatePicker extends Component {
     const { isCalendarVisible } = this.state
     const { disabled, value } = this.props
 
+    console.log(styles)
+
     return (
-      <div className='datePicker' onClick={this.onClickDatePicker}>
+      <div className={styles.datePicker} onClick={this.onClickDatePicker}>
         <input
-          className={`datePicker__input ${
-            disabled === true ? 'datePicker__input--disabled' : ''
+          className={`${styles.datePicker__input} ${
+            disabled === true ? styles['datePicker__input--disabled'] : ''
           }`}
           type='text'
           onFocus={this.atCalendarFocusIn}

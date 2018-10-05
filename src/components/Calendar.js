@@ -1,6 +1,6 @@
 /**
  * @localtrip-tech
- * Infused by ashwamegh 03/10/2018
+ * Infused by ashwamegh 03/10 /2018
  */
 
 import React, { Component } from 'react'
@@ -9,6 +9,7 @@ import SelectYear from './SelectYear'
 import SelectMonth from './SelectMonth'
 import WeekDays from './WeekDays'
 import getToday from './../helper/getToday'
+import styles from './calendar.css'
 
 class Calendar extends Component {
   static propTypes = {
@@ -107,15 +108,15 @@ class Calendar extends Component {
     const { range, locale, date, selectToday } = this.props
 
     return (
-      <div className='datePicker__calendar'>
-        <div className='datePicker__calendar__header'>
-          <span onClick={this.prevMonth} className='datePicker__prev' />
+      <div className={styles.datePicker__calendar}>
+        <div className={styles.datePicker__calendar__header}>
+          <span onClick={this.prevMonth} className={styles.datePicker__prev} />
           <SelectYear year={Number(year)} selectYear={this.selectYear} range={range} />
           <SelectMonth month={Number(month)} selectMonth={this.selectMonth} locale={locale} />
-          <span onClick={this.nextMonth} className='datePicker__next' />
+          <span onClick={this.nextMonth} className={styles.datePicker__next} />
         </div>
         <WeekDays locale={locale} highlight={new Date(date).getFullYear() === year && new Date(date).getMonth() + 1 === month} year={Number(year)} month={Number(month)} day={Number(day)} selectDay={this.selectDay} />
-        <div className='datePicker__btnGroup'><button className='datePicker__btn datePicker__btn--today' onClick={selectToday}>{'Today'}</button></div>
+        <div className={styles.datePicker__btnGroup}><button className={`${styles.datePicker__btn} ${styles['datePicker__btn--today']}`} onClick={selectToday}>{'Today'}</button></div>
       </div>
     )
   }

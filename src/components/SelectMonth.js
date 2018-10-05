@@ -6,6 +6,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import styles from './selectMonth.css'
+
 class SelectMonth extends Component {
   static propTypes = {
     locale: PropTypes.string,
@@ -54,7 +56,7 @@ class SelectMonth extends Component {
       <select
         name=''
         id=''
-        className='datePicker__month'
+        className={styles.datePicker__month}
         value={month}
         onChange={this.handleMonthChange}
       >

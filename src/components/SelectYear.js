@@ -6,6 +6,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import styles from './selectYear.css'
+
 class SelectYear extends Component {
   static propTypes = {
     range: PropTypes.arrayOf(PropTypes.number),
@@ -42,7 +44,7 @@ class SelectYear extends Component {
 
     return (
       <select value={year}
-        className='datePicker__year'
+        className={styles.datePicker__year}
         onChange={this.handleYearChange}>
         {yearOptions}
       </select>
